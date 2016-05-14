@@ -1,6 +1,6 @@
 from ROOT import TH1, kViolet, kMagenta, kOrange, kRed, kBlue
 
-class Style:
+class Style(object):
     def __init__(self,
                  markerStyle = 8,
                  markerColor = 1,
