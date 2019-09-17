@@ -28,8 +28,10 @@ class DataMCPlot(object):
     '''
     _f_keeper = {}
     _t_keeper = {}
+    leg_x, leg_y = 0.60, 0.64
+    leg_dx, leg_dy = 0.33, 0.27
 
-    def __init__(self, name, histPref=None, legend_position='right'):
+    def __init__(self, name, histPref=None):
         self.histosDict = {}
         self.histos = []
         self.supportHist = None
@@ -37,14 +39,9 @@ class DataMCPlot(object):
         self.stack = None
         self.legendOn = True
         self.legend = None
-        leg_dx, leg_dy = 0.33, 0.27
-        leg_x, leg_y = 0.60, 0.64
-        if legend_position == 'left':
-            leg_x, leg_y = 0.22
-        self.legendBorders = (leg_x, leg_y, leg_x + leg_dx, leg_y + leg_dy)            
-        self.legendPos = 'left'
-        # self.lastDraw = None
-        # self.lastDrawArgs = None
+        self.legendBorders = (self.leg_x, self.leg_y,
+                              self.leg_x + self.leg_dx,
+                              self.leg_y + self.leg_dy)
         self.nostack = None
         self.blindminx = None
         self.blindmaxx = None
@@ -436,11 +433,7 @@ class DataMCPlot(object):
                 hist.Draw('SAME')
             else:
                 hist.Draw('SAME HIST')
-
-##        if self.supportHist.weighted.GetMaximumBin() < self.supportHist.weighted.GetNbinsX()/2:
-##            self.legendBorders = 0.62, 0.46, 0.88, 0.89
-##            self.legendPos = 'right'
-
+                
         self.DrawLegend(print_norm=print_norm)
         if TPad.Pad():
             TPad.Pad().Update()
